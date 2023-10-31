@@ -4,12 +4,14 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import lombok.Data;
+import lombok.*;
 
 import java.util.UUID;
 
 @Entity(name = "tb_candidate")
 @Data
+@AllArgsConstructor
+@NoArgsConstructor
 public class Candidate {
 
     @Id
@@ -19,5 +21,10 @@ public class Candidate {
     private String name;
 
     private Double salary_estimate;
+
+    public Candidate(RequestCandidate requestCandidate){
+        this.name = requestCandidate.name();
+        this.salary_estimate = requestCandidate.salary_estimate();
+    }
 
 }
