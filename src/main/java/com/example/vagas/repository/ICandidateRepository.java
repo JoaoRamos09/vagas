@@ -1,5 +1,6 @@
-package com.example.vagas.models;
+package com.example.vagas.repository;
 
+import com.example.vagas.models.Candidate;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
