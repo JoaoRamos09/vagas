@@ -1,6 +1,6 @@
 # Sistema de Vagas de Trabalho
 
-Este é o meu primeiro projeto web individual desenvolvido, a ideia é que seja um CRUD com uma API e seus endpoints. O projeto é um sistema de vagas de trabalho, no qual é possível cadastrar, atualizar e excluir vagas e candidatos. Além disso, o sistema permite a filtragem de vagas com base nas características dos candidatos, como o salário.
+Este é o meu primeiro projeto backend web individual desenvolvido, a ideia é que seja um CRUD com uma API e seus endpoints. O projeto é um sistema de vagas de trabalho, no qual é possível cadastrar, atualizar e excluir vagas e candidatos. Além disso, o sistema permite a filtragem de vagas com base nas características dos candidatos, como o salário.
 
 ## Tecnologias Utilizadas
 
