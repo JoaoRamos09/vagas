@@ -1,6 +1,5 @@
 package com.example.vagas.errors;
 
-import com.example.vagas.dtos.CandidateDTO;
 import com.example.vagas.dtos.ExceptionDTO;
 import jakarta.validation.ConstraintViolationException;
 import org.springframework.dao.DataIntegrityViolationException;
@@ -16,7 +15,7 @@ public class ExceptionHandlerController {
 
     @ExceptionHandler(NoSuchElementException.class)
     public ResponseEntity<ExceptionDTO> userNotFound(NoSuchElementException e){
-        ExceptionDTO exceptionDTO = new ExceptionDTO("Usuário não foi encontrado","400");
+        ExceptionDTO exceptionDTO = new ExceptionDTO("ID não foi encontrado","400");
         return ResponseEntity.badRequest().body(exceptionDTO);
 
     }
@@ -35,7 +34,7 @@ public class ExceptionHandlerController {
 
     @ExceptionHandler(MethodArgumentTypeMismatchException.class)
     public ResponseEntity<ExceptionDTO> userNotFound(MethodArgumentTypeMismatchException e){
-        ExceptionDTO exceptionDTO = new ExceptionDTO("Usuário não foi encontrado","400");
+        ExceptionDTO exceptionDTO = new ExceptionDTO("ID não foi encontrado","400");
         return ResponseEntity.badRequest().body(exceptionDTO);
 
     }
