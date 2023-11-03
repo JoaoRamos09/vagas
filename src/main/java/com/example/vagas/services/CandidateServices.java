@@ -18,10 +18,11 @@ public class CandidateServices {
         this.iCandidateRepository.save(candidate);
     }
 
-    public void allSetters(Candidate candidate, CandidateDTO requestCandidate){
+    public Candidate allSetters(Candidate candidate, CandidateDTO requestCandidate){
         candidate.setName(requestCandidate.name());
         candidate.setSalary_estimate(requestCandidate.salary_estimate());
         candidate.setCPF(requestCandidate.CPF());
+        return candidate;
     }
 
     public List<Candidate> getAllCandidates(){

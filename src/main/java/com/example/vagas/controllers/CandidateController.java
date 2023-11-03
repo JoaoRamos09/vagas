@@ -27,17 +27,17 @@ public class CandidateController {
     @PostMapping("/")
     public ResponseEntity<String> createNewCandidate(@RequestBody @Valid CandidateDTO requestCandidate){
         Candidate newCandidate = new Candidate(requestCandidate);
-       candidateRepository.save(newCandidate);
+        candidateServices.createNewCandidate(newCandidate);
         return ResponseEntity.ok().body("Usuário criado com sucesso");
     }
 
     @PutMapping("/{id}")
     @Transactional
     public ResponseEntity<Candidate> updateCandidate(@RequestBody @Valid CandidateDTO candidateDTO, @PathVariable UUID id) throws Exception {
-        Optional<Candidate> newCandidate = candidateRepository.findById(id);
-        Candidate candidate = newCandidate.orElseThrow();
-        candidateServices.allSetters(candidate,candidateDTO);
-        return ResponseEntity.ok().body(candidate);
+        Optional<Candidate>  candidateById = candidateRepository.findById(id);
+        Candidate candidate = candidateById.orElseThrow();
+        Candidate newCandidate = candidateServices.allSetters(candidate, candidateDTO);
+        return ResponseEntity.ok().body(newCandidate);
     }
 
     @GetMapping("/")
@@ -51,4 +51,5 @@ public class CandidateController {
         candidateRepository.deleteById(uuid);
         return ResponseEntity.ok().body("Usuário deletado com sucesso");
     }
+
 }
