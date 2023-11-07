@@ -13,7 +13,7 @@ import java.util.UUID;
 @AllArgsConstructor
 @NoArgsConstructor
 
-public class Job {
+public class Jobs    {
     @Id
     @GeneratedValue(generator = "UUID")
     private UUID id;
@@ -24,7 +24,7 @@ public class Job {
 
     private Double salary;
 
-    public Job(JobsDTO jobsDTO){
+    public Jobs(JobsDTO jobsDTO){
         this.title = jobsDTO.title();
         this.description = jobsDTO.description();
         this.salary = jobsDTO.salary();

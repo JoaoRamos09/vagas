@@ -2,7 +2,7 @@ package com.example.vagas.services;
 
 import com.example.vagas.dtos.JobsDTO;
 import com.example.vagas.models.Candidate;
-import com.example.vagas.models.Job;
+import com.example.vagas.models.Jobs;
 import com.example.vagas.repository.ICandidateRepository;
 import com.example.vagas.repository.IJobsRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,13 +18,13 @@ public class JobsServices {
     @Autowired
     private ICandidateRepository iCandidateRepository;
 
-    public void createNewJob(Job job){
+    public void createNewJob(Jobs job){
         this.iJobsRepository.save(job);
     }
 
-    public List<Job> filterJobsByCandidateSalary(UUID uuid) throws Exception {
+    public List<Jobs> filterJobsByCandidateSalary(UUID uuid) throws Exception {
         Optional<Candidate> optionalCandidate = this.iCandidateRepository.findById(uuid);
-        List<Job> allJobs = iJobsRepository.findAll();
+        List<Jobs> allJobs = iJobsRepository.findAll();
         if (optionalCandidate.isPresent()) {
             Candidate candidate = optionalCandidate.get();
             return allJobs.stream().filter(job -> job.getSalary() > candidate.getSalary_estimate()).toList();
@@ -32,7 +32,7 @@ public class JobsServices {
         throw new Exception("erro no filtro");
     }
 
-    public Job allSetters(Job job, JobsDTO jobsDTO){
+    public Jobs allSetters(Jobs job, JobsDTO jobsDTO){
         job.setTitle(jobsDTO.title());
         job.setSalary(jobsDTO.salary());
         job.setDescription(jobsDTO.description());
