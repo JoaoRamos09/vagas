@@ -21,7 +21,7 @@ import java.util.UUID;
 public class Users implements UserDetails {
 
 
-    private String username;
+    private String email;
 
     private String password;
 
@@ -34,7 +34,7 @@ public class Users implements UserDetails {
     private UUID id;
 
     public Users(String username,String password,UserRole userRole){
-        this.username = username;
+        this.email = username;
         this.password = password;
         this.userRole = userRole;
     }
@@ -54,7 +54,7 @@ public class Users implements UserDetails {
 
     @Override
     public String getUsername() {
-        return this.username;
+        return this.email;
     }
 
     @Override
