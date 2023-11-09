@@ -16,7 +16,7 @@ import org.springframework.web.filter.OncePerRequestFilter;
 import java.io.IOException;
 
 @Component
-public class SecurityFilter extends OncePerRequestFilter {
+public class JWTFilter extends OncePerRequestFilter {
 
     @Autowired
     TokenServices tokenService;
@@ -27,8 +27,8 @@ public class SecurityFilter extends OncePerRequestFilter {
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
         String token = this.recoverToken(request);
         if (token != null){
-            String login = tokenService.validateToken(token);
-            UserDetails user = usersRepository.findByUsername(login);
+            String username = tokenService.validateToken(token);
+            UserDetails user = usersRepository.findByEmail(username);
             UsernamePasswordAuthenticationToken authentication = new UsernamePasswordAuthenticationToken(user, null, user.getAuthorities());
             SecurityContextHolder.getContext().setAuthentication(authentication);
         }
@@ -37,7 +37,7 @@ public class SecurityFilter extends OncePerRequestFilter {
     }
     protected String recoverToken(HttpServletRequest request){
         String authHeader = request.getHeader("Authorization");
-        if (authHeader == null) return null;
+        if (authHeader == null || !authHeader.startsWith("Bearer ")) return null;
         return authHeader.replace("Bearer ","");
 
     }

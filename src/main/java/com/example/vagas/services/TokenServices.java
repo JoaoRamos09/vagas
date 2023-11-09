@@ -22,8 +22,9 @@ public class TokenServices {
             Algorithm algorithm = Algorithm.HMAC256(secret);
             String token = JWT.create()
                     .withIssuer("auth-api")
-                    .withSubject(users.getUsername())
-                    .withExpiresAt(nowAfterTwoHours())
+                    .withAudience(users.getEmail())
+                    .withClaim("user", users.getUsername())
+                    .withExpiresAt(timeTokenExpiration())
                     .sign(algorithm);
             return token;
 
@@ -40,14 +41,15 @@ public class TokenServices {
                     .withIssuer("auth-api")
                     .build()
                     .verify(token)
-                    .getSubject();
+                    .getClaim("user")
+                    .asString();
         }
         catch (JWTVerificationException e){
-            return "";
+            throw new RuntimeException("Error while validation token");
         }
     }
 
-    public Instant nowAfterTwoHours(){
+    public Instant timeTokenExpiration(){
         return LocalDateTime.now().plusHours(2).toInstant(ZoneOffset.of("-03:00"));
     }
 
